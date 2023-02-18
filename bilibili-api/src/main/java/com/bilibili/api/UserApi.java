@@ -1,5 +1,6 @@
 package com.bilibili.api;
 
+import com.bilibili.api.support.UserSupport;
 import com.bilibili.domain.JsonResponse;
 import com.bilibili.domain.User;
 import com.bilibili.service.UserService;
@@ -16,6 +17,16 @@ public class UserApi {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserSupport userSupport;
+
+    @GetMapping("/users")
+    public JsonResponse<User> getUserInfo() {
+        Long userId = userSupport.getCurrentUserId();
+        User user = userService.getUserInfo(userId);
+        return new JsonResponse<>(user);
+    }
+
     @GetMapping("/rsa-pks")
     public JsonResponse<String> getRsaPublicKey() {
         String pk = RSAUtil.getPublicKeyStr();
@@ -29,7 +40,7 @@ public class UserApi {
     }
 
     @PostMapping("/user-login")
-    public JsonResponse<String> login(@RequestBody User user) {
+    public JsonResponse<String> login(@RequestBody User user) throws Exception {
         String token = userService.login(user);
         return new JsonResponse<>(token);
     }

@@ -45,5 +45,14 @@
                      #{createTime},
                  )
     </insert>
+    
+    <select id="getUserById" parameterType="java.lang.Long" resultType="com.bilibili.domain.User">
+        select * from t_user where id = ${id}
+    </select>
+
+
+    <select id="getUserInfoByUserId" parameterType="java.lang.Long" resultType="com.bilibili.domain.UserInfo">
+        select * from t_user_info where userId = ${userId}
+    </select>
 
 </mapper>

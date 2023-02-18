@@ -67,7 +67,7 @@ public class UserService {
         return userDao.getUserByPhone(phone);
     }
 
-    public String login(User user) {
+    public String login(User user) throws Exception {
         String phone = user.getPhone();
         if(StringUtils.isNullOrEmpty(phone)) {
             throw new ConditionException("phone number cannot be empty");
@@ -92,7 +92,13 @@ public class UserService {
             throw new ConditionException("password error");
         }
 
-        TokenUtil tokenUtil = new TokenUtil();
-        return tokenUtil.generateToken(dbUser.getId());
+        return TokenUtil.generateToken(dbUser.getId());
+    }
+
+    public User getUserInfo(Long userId) {
+        User user = userDao.getUserById(userId);
+        UserInfo userInfo = userDao.getUserInfoByUserId(userId);
+
+        return user;
     }
 }
