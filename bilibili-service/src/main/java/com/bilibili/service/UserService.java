@@ -47,9 +47,7 @@ public class UserService {
         user.setSalt(salt);
         user.setCreateTime(now);
         user.setPassword(md5Password);
-
-        Long id = userDao.addUser(user);
-        user.setId(id);
+        userDao.addUser(user);
 
         UserInfo userInfo = new UserInfo();
 
@@ -98,6 +96,7 @@ public class UserService {
     public User getUserInfo(Long userId) {
         User user = userDao.getUserById(userId);
         UserInfo userInfo = userDao.getUserInfoByUserId(userId);
+        user.setUserInfo(userInfo);
 
         return user;
     }
