@@ -11,6 +11,8 @@
     </select>
 
     <insert id="addUser" parameterType="com.bilibili.domain.User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user (phone, email, password, salt, createTime)
+        values (#{phone}, #{email}, #{password}, #{salt}, #{createTime})
         insert into t_user (
             phone,
             email,
@@ -49,6 +51,7 @@
     <select id="getUserById" parameterType="java.lang.Long" resultType="com.bilibili.domain.User">
         select * from t_user where id = ${id}
     </select>
+
 
     <select id="getUserInfoByUserId" parameterType="java.lang.Long" resultType="com.bilibili.domain.UserInfo">
         select * from t_user_info where userId = ${userId}
