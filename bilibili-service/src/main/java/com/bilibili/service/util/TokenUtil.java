@@ -19,7 +19,7 @@ public class TokenUtil {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.SECOND, 30);
+        calendar.add(Calendar.SECOND, 1000);
 
         return JWT.create()
                 .withKeyId(String.valueOf(userId))

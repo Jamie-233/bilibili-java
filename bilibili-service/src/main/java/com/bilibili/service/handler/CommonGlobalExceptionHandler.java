@@ -16,11 +16,11 @@ public class CommonGlobalExceptionHandler {
 
     @ExceptionHandler(value =  Exception.class)
     @ResponseBody
-    public JsonResponse<String> commonExceptionHandler(HttpServletRequest request, Exception e) {
-        String errorMsg = e.getMessage();
+    public JsonResponse<String> commonExceptionHandler(HttpServletRequest request, Exception ex) {
+        String errorMsg = ex.getMessage();
 
-        if(e instanceof ConditionException) {
-            String errorCode = ((ConditionException)e).getCode();
+        if(ex instanceof ConditionException) {
+            String errorCode = ((ConditionException)ex).getCode();
             System.out.println("++ errorCode ++ " + errorCode);
             return new JsonResponse<>(errorCode, errorMsg);
         } else {

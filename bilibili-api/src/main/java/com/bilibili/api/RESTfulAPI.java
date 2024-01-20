@@ -12,7 +12,7 @@ public class RESTfulAPI {
 
     public RESTfulAPI() {
         dataMap = new HashMap<>();
-        for (int i = 1; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             Map<String, Object> data = new HashMap<>();
             data.put("id", i);
             data.put("name", "name " + i);

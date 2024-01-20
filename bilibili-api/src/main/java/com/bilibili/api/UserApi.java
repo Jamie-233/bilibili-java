@@ -3,13 +3,11 @@ package com.bilibili.api;
 import com.bilibili.api.support.UserSupport;
 import com.bilibili.domain.JsonResponse;
 import com.bilibili.domain.User;
+import com.bilibili.domain.UserInfo;
 import com.bilibili.service.UserService;
 import com.bilibili.service.util.RSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserApi {
@@ -39,9 +37,16 @@ public class UserApi {
         return JsonResponse.success();
     }
 
-    @PostMapping("/user-login")
+    @PostMapping("/login")
     public JsonResponse<String> login(@RequestBody User user) throws Exception {
         String token = userService.login(user);
         return new JsonResponse<>(token);
+    }
+
+    @PutMapping("/user-infos")
+    public JsonResponse<String> updateUserInfos(@RequestBody UserInfo userInfo) {
+        Long id = userSupport.getCurrentUserId();
+        userInfo.setUserId(id);
+        return JsonResponse.success();
     }
 }
